@@ -1,0 +1,60 @@
+
+<img id="main_img" src="image3.jpg" alt="">
+<style>
+	
+	#cropmate_div {
+  	position: relative;
+	}
+	#crop_vp{
+		position: absolute;
+		background-color: transparent;
+		border:1px solid red;
+	}
+</style>
+<script>
+
+	var elem_div = document.createElement("div");
+	elem_div.id = "cropmate_div";
+	elem_div.appendChild(get("main_img"));
+	document.body.appendChild(elem_div);
+
+	elem_div.onclick = function (event) {
+		if(get("crop_vp"))
+		{
+			get("crop_vp").remove();
+		}
+		var elem_div_crop = document.createElement("div");
+		elem_div_crop.style.width = "50px";
+		elem_div_crop.style.height = "50px";
+		// elem_div_crop.style.backgroundColor = "red";
+
+		elem_div_crop.id = "crop_vp";
+
+		elem_div_crop.style.left = event.clientX + "px";
+		elem_div_crop.style.top = event.clientY + "px";
+		elem_div.appendChild(elem_div_crop);
+		elem_div.insertBefore(elem_div_crop,elem_div.firstChild);
+		var img = new Image();
+		img.src = get("main_img").src;
+		document.body.appendChild(crop(img, event.clientX, event.clientY, 550, 250));
+
+	}
+
+function crop(image, x1, y1, x2, y2) {
+	if(document.getElementById('canvasid'))
+		document.getElementById('canvasid').remove();
+  var canvas = document.createElement('canvas');
+
+   canvas.setAttribute('width', x2 - x1);
+  canvas.setAttribute('height', y2 - y1);
+canvas.id = "canvasid";
+  var context = canvas.getContext('2d');
+  context.drawImage(image, -x1, -y1);
+
+  return canvas;
+}
+
+	function get(id){
+		return document.getElementById(id);
+	}
+</script>
