@@ -147,9 +147,10 @@ function crop(image, x1, y1, x2, y2) {
 	// console.log(image, x1, y1, x2, y2);
 	// var canvas = document.createElement('canvas');
 	var canvas = document.createElement('canvas');
-	canvas.width = 500;
+	canvas.width = x2;
+console.log(canvas.width);
 	canvas.id = "canvasid";
-	canvas.height = 300;
+	canvas.height = y2;
 	canvas.style.float = 'right';
 	var context = canvas.getContext('2d')
 	// console.log(context);
@@ -165,7 +166,7 @@ function crop(image, x1, y1, x2, y2) {
 	document.body.appendChild(canvas);
 	// console.log(canvas.width);
 	// console.log(image, sourceX, sourceY, sourceWidth, sourceHeight, x, y, destWidth, destHeight);
-	context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, 500, 300);
+	context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, x2, y2);
 }
 
 
@@ -183,5 +184,5 @@ function crop(image, x1, y1, x2, y2) {
 		imagecrop(parseInt(get('crop_vp').style.left),parseInt(get('crop_vp').style.top));
 	}
 </script>
-W: <input type="number" onkeyup="update_w(this)">
-h: <input type="number" onkeyup="update_h(this)">
+W: <input type="number" id="wval" onkeyup="update_w(this)">
+h: <input type="number" id="hval" onkeyup="update_h(this)">
